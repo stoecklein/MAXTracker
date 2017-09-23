@@ -9,6 +9,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -29,6 +30,128 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+
+        Marker Grand3 = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.110462, -94.580374))
+                .title("On Grand at 3rd")
+                .snippet("River Market"));
+
+        Marker Grand5 = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.108897, -94.580481))
+                .title("On Grand at 5th")
+                .snippet("City Market"));
+
+        Marker Grand9 = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.103494, -94.580707))
+                .title("On Grand at 9th")
+                .snippet("Courthouse"));
+
+        Marker Grand11 = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.101119, -94.580826))
+                .title("On Grand at 11th")
+                .snippet("Financial District"));
+
+        Marker Grand12 = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.099873, -94.580918))
+                .title("On Grand at 12th")
+                .snippet("Arena"));
+
+        Marker Grand16 = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.094459, -94.581199))
+                .title("On Grand at 16th")
+                .snippet("Crossroads Arts District"));
+
+        Marker Grand19 = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.090433, -94.581396))
+                .title("On Grand at 19th")
+                .snippet("Crossroads Arts District"));
+
+        Marker Grand22 = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.086061, -94.581599))
+                .title("On Grand at 22nd")
+                .snippet("Washington Sq. Park"));
+
+        Marker GrandPershing = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.083593, -94.581720))
+                .title("On Grand at Pershing")
+                .snippet("Crown Center"));
+
+        Marker Main29= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.074763, -94.585088))
+                .title("On Main at 29th")
+                .snippet("Liberty Memorial"));
+
+        Marker Main31= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.070939, -94.585297))
+                .title("On Main at 31st")
+                .snippet("Union Hill"));
+
+        Marker MainLinwood= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.068265, -94.585429))
+                .title("On Main at Linwood")
+                .snippet("Linwood"));
+
+        Marker MainArmour= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.063798, -94.585644))
+                .title("On Main at Armour")
+                .snippet("Armour"));
+
+        Marker Main39= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.056568, -94.586100))
+                .title("On Main at 39th")
+                .snippet("39th"));
+
+        Marker Main43= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.049334, -94.586518))
+                .title("On Main at 43rd")
+                .snippet("43rd"));
+
+        Marker Main45= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.046319, -94.586688))
+                .title("On Main at 45th")
+                .snippet("Art Museums"));
+
+        Marker Main47= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.041274, -94.588069))
+                .title("On Main at 47th")
+                .snippet("Country Club Plaza"));
+
+        Marker Main49= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.038987, -94.587116))
+                .title("On Main at 49th")
+                .snippet("Plaza Library"));
+
+        Marker Brookside51= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.034369, -94.584249))
+                .title("On Brookside at 51st")
+                .snippet("UMKC"));
+
+        Marker Brookside55= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.027420, -94.584853))
+                .title("On Brookside at 55th")
+                .snippet("Brookside"));
+
+        Marker Brookside59= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.020285, -94.588330))
+                .title("On Brookside at 59th")
+                .snippet("Brookside"));
+
+        Marker Main63= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(39.013916, -94.591547))
+                .title("On Brookside at 63rd")
+                .snippet("Brookside"));
+
+        Marker WornallGregory= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(38.999689, -94.593838))
+                .title("On Wornall at Gregory")
+                .snippet("Gregory"));
+
+        Marker Wornall75= mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(38.993336, -94.593783))
+                .title("29th and Main")
+                .snippet("Waldo"));
+
 
         // Add a marker in Sydney, Australia, and move the camera.
         //LatLng sydney = new LatLng(-34, 151);
@@ -251,5 +374,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    
+
 }
