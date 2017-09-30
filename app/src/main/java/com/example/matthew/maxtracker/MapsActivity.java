@@ -1,6 +1,7 @@
 package com.example.matthew.maxtracker;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,10 +14,15 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import android.widget.TextView;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    //String currentLoc;
+    //TextView Ntime=(TextView)findViewById(R.id.NorthMin);
+    //updateNorthTime();
+    //int STime = getSouthTime();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        updateNorthTime();
+        updateStopLoc();
     }
 
     @Override
@@ -373,6 +381,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Polyline polyline = mMap.addPolyline(rectOptions);
     }
 
+    public void updateStopLoc(){
 
+        TextView curLoc=(TextView)findViewById(R.id.CurrentStop);
+        curLoc.setText("3rd and Grand");
+    }
+
+    public void updateNorthTime(){
+        TextView Ntime=(TextView)findViewById(R.id.NorthMin);
+        int curMin = (43%15);
+        //get location
+
+        String currentLoc;
+        currentLoc = "3rd and Grand";
+
+        switch (currentLoc) {
+            case ("3rd and Grand"):
+                Ntime.setText(curMin - 7 + " Mins");
+                break;
+
+
+            default:
+                Ntime.setText("100");
+                break;
+        }
+    }
 
 }
