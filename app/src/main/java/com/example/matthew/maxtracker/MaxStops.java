@@ -1,6 +1,10 @@
 package com.example.matthew.maxtracker;
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationManager;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -57,7 +61,7 @@ public class MaxStops {
 
     }
 
-    Stop calcClosestStop (double latIn){
+    Stop ClosestStop (double latIn){
 
         Iterator<Stop> itr = stopList.iterator();
         Stop itrObject = itr.next();
@@ -69,16 +73,13 @@ public class MaxStops {
 
         while (itr.hasNext()){
 
-            if (latIn < itrObject.getLat()){
+            if (latIn < itrObjectNext.getLat()){
                 itrObject = itrObjectNext;
                 itrObjectNext = itr.next();
             }
 
             else {
-                double northStopDistance = (latIn - itrObject.getLat());
-                double southStopDistance = (itrObjectNext.getLat() - latIn);
-
-                if(southStopDistance < northStopDistance){
+                if((itrObjectNext.getLat() - latIn) < (latIn - itrObject.getLat())){
                     return itrObject;
                 }
                 else{
@@ -90,8 +91,6 @@ public class MaxStops {
 
         return itrObjectNext;   //Return southern stop, if south of it
     }
-    int calcNorthTime(){return 0;}
-    int calSouthTime(){return 0;}
 
     void addMapMarkers(GoogleMap map){
 
@@ -333,4 +332,5 @@ public class MaxStops {
 // Get back the mutable Polyline
         Polyline polyline = map.addPolyline(rectOptions);
     }
+
 }

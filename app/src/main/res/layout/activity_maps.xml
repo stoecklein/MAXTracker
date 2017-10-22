@@ -32,13 +32,24 @@
             android:layout_height="125dp">
 
             <TextView
+                android:id="@+id/StopStatic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Stop"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:layout_above="@+id/NorthText"
+                android:layout_alignLeft="@+id/NorthText"
+                android:layout_alignStart="@+id/NorthText"
+                android:layout_marginBottom="11dp" />
+
+            <TextView
                 android:id="@+id/NorthText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/NorthText"
                 android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:layout_marginLeft="22dp"
-                android:layout_marginStart="22dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -58,14 +69,13 @@
                 android:id="@+id/NorthMin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/NorthText"
-                android:layout_alignBottom="@+id/NorthText"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="38dp"
-                android:layout_marginRight="38dp"
                 android:text="@string/NorthMin"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large" />
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:layout_above="@+id/SouthMin"
+                android:layout_toRightOf="@+id/StopStatic"
+                android:layout_toEndOf="@+id/StopStatic"
+                android:layout_marginLeft="56dp"
+                android:layout_marginStart="56dp" />
 
             <TextView
                 android:id="@+id/SouthText"
@@ -81,12 +91,14 @@
                 android:id="@+id/CurrentStop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/NorthMin"
-                android:layout_alignLeft="@+id/NorthText"
-                android:layout_alignStart="@+id/NorthText"
-                android:layout_marginBottom="12dp"
                 android:text="@string/StopText"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large" />
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:layout_alignBaseline="@+id/StopStatic"
+                android:layout_alignBottom="@+id/StopStatic"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp" />
         </RelativeLayout>
 
     </LinearLayout>

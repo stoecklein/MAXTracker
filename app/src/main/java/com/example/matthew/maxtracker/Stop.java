@@ -11,9 +11,9 @@ public class Stop {
         snippet = snippetIn;
         lat = latIn;
         lon = lonIn;
-        southFreqIn = southFrequency;
-        northFreqIn = northFrequency;
-        extendedIn = extended;
+        southFrequency = southFreqIn;
+        northFrequency = northFreqIn;
+        extended = extendedIn;
     }
 
     int id;
@@ -30,5 +30,8 @@ public class Stop {
     String getSnippet(){return snippet;}
     double getLat(){return lat;}
     double getLon(){return lon;}
+    int getNorthFrequency(){return northFrequency;}
+    int getSouthFrequency(){return southFrequency;}
+    boolean isExtended(){return extended;}
 
 }
