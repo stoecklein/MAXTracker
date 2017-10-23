@@ -8,12 +8,21 @@ import java.util.Calendar;
  */
 
 public class Time {
-    boolean isBusOper(int hourStart, int hourEnd){
+
+    Time(int startIn, int endIn){
+        startTime = startIn;
+        endTime = endIn;
+    }
+
+    int startTime;
+    int endTime;
+
+    boolean isBusOper(){
         Calendar calendar = Calendar.getInstance();
         int currentHours = LocalDateTime.now().getHour();
         int currentMinute = LocalDateTime.now().getMinute();
         //int seconds = calendar.get(Calendar.SECOND);
-        if( (currentHours < hourStart) && (currentHours > hourEnd )){
+        if( (currentHours < startTime) && (currentHours > endTime )){
             return false;
         }
         else {

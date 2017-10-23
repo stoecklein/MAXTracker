@@ -34,6 +34,4 @@ public class Stop {
     int getSouthFrequency(){return southFrequency;}
     boolean isExtended(){return extended;}
 
-
-
 }
