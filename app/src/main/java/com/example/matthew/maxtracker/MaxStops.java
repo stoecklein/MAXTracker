@@ -12,11 +12,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,8 +24,7 @@ public class MaxStops {
     MaxStops(){
         fillList();
     }
-
-    List<Stop> stopList = new ArrayList<Stop>();
+    Time maxTime = new Time();
 
 
     void fillList(){
@@ -61,37 +55,45 @@ public class MaxStops {
 
     }
 
+    private List<Stop> stopList = new ArrayList<Stop>();
+    private int startHour = 6;
+    private int endHour = 1;
+
+    //Take in users current lat
+    //Return stop object as the closest stop
     Stop ClosestStop (double latIn){
 
         Iterator<Stop> itr = stopList.iterator();
-        Stop itrObject = itr.next();
-        Stop itrObjectNext = itr.next();
+        Stop itrObject = itr.next();    //Points to northern stop object
+        Stop itrObjectNext = itr.next();    //Points to southern stop object
 
         if(latIn > itrObject.getLat()){
-            return itrObject;   //Return northern stop, if north of it
+            return itrObject;   //If users lat is north of most northern stop, return first object
         }
 
         while (itr.hasNext()){
 
-            if (latIn < itrObjectNext.getLat()){
+            if (latIn < itrObjectNext.getLat()){    //Move to inspect next stop
                 itrObject = itrObjectNext;
                 itrObjectNext = itr.next();
             }
 
-            else {
-                if((itrObjectNext.getLat() - latIn) < (latIn - itrObject.getLat())){
-                    return itrObject;
+            else {  //Current users lat is in between north and south stop objects
+                if((Math.abs(itrObjectNext.getLat() - latIn)) > (Math.abs(latIn - itrObject.getLat()))){
+                    return itrObject;   //If distance from users lat to north stop is less, return it
                 }
                 else{
-                    return itrObjectNext;
+                    return itrObjectNext;//If distance from users lat to south stop is less, return it
                 }
             }
 
         }
 
-        return itrObjectNext;   //Return southern stop, if south of it
+        return itrObjectNext;   //If users lat is south of most southern stop, return last object
     }
 
+    //Takes in a Google map object
+    //Adds stops to map for every stop object in the stop list
     void addMapMarkers(GoogleMap map){
 
         Iterator<Stop> itr = stopList.iterator();
@@ -106,10 +108,12 @@ public class MaxStops {
         }
     }
 
+    //Takes in a Google map object
+    //Adds route line for Max route
     void addRouteLine(GoogleMap map){
         PolylineOptions rectOptions = new PolylineOptions()
-                .width(10)
-                .color(Color.RED)
+                .width(10)  //Set width for line width
+                .color(Color.RED)   //Set color for route line
 
                 .add(new LatLng(39.110462, -94.580374))
                 .add(new LatLng(39.110344, -94.580961))//3 & Grand
@@ -327,10 +331,11 @@ public class MaxStops {
                 .add(new LatLng(38.993590, -94.593757))
                 .add(new LatLng(38.993336, -94.593783));//loop back to 74 & Wornall
 
-        //.add(new LatLng(39.110430, -94.580544)); // Closes the polyline.
+        Polyline polyline = map.addPolyline(rectOptions);// Get back the mutable Polyline
+    }
 
-// Get back the mutable Polyline
-        Polyline polyline = map.addPolyline(rectOptions);
+    boolean isInOperation(){
+        return maxTime.isBusOper(startHour, endHour);
     }
 
 }

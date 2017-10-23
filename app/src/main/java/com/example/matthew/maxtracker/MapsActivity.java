@@ -60,7 +60,7 @@ public class MapsActivity extends FragmentActivity
         }
 
         updateStopLoc();
-        if(ifBusOper() == true){
+        if(stopsObj.isInOperation() == true){
             updateTimeRemaining();
         }
         else{
@@ -193,18 +193,5 @@ public class MapsActivity extends FragmentActivity
             Stime.setText(Math.abs(currentMinute - southFrequencyIndex) + " Minutes");
         }
 
-    }
-
-    boolean ifBusOper(){
-        Calendar calendar = Calendar.getInstance();
-        int currentHours = LocalDateTime.now().getHour();
-        int currentMinute = LocalDateTime.now().getMinute();
-        //int seconds = calendar.get(Calendar.SECOND);
-        if( (currentHours < 6) && (currentHours > 1 )){
-            return false;
-        }
-        else {
-            return true;
-        }
     }
 }
