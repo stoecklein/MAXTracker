@@ -42,7 +42,7 @@ public class MapsActivity extends FragmentActivity
     private static final int PERMISSION_ACCESS_FINE_LOCATION = 1;
     private GoogleApiClient googleApiClient;
     private GoogleMap mMap;
-    MaxStops stopsObj = new MaxStops(); //Object for Max map
+    MaxStops stopsObj = new MaxStops(this); //Object for Max map
 
 
     @Override
@@ -59,13 +59,17 @@ public class MapsActivity extends FragmentActivity
                     PERMISSION_ACCESS_FINE_LOCATION);
         }
 
-        updateStopLoc();
+        TextView Ntime= findViewById(R.id.NorthMin);
+        TextView Stime= findViewById(R.id.SouthMin);
+        TextView curLoc= findViewById(R.id.CurrentStop);
+
+        stopsObj.updateStopLoc(curLoc);
         if(stopsObj.isInOperation() == true){
-            updateTimeRemaining();
+            stopsObj.updateTimeRemaining(Ntime, Stime);
         }
         else{
-            TextView Ntime= findViewById(R.id.NorthMin);
-            TextView Stime= findViewById(R.id.SouthMin);
+            Ntime= findViewById(R.id.NorthMin);
+            Stime= findViewById(R.id.SouthMin);
             Ntime.setText("No Bus On Route");
             Stime.setText("No Bus On Route");
         }
@@ -124,74 +128,5 @@ public class MapsActivity extends FragmentActivity
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
-    }
-
-    public void updateStopLoc(){
-
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
-
-            Stop tempObj = stopsObj.ClosestStop(latitude);
-            TextView curLoc= findViewById(R.id.CurrentStop);
-            curLoc.setText(tempObj.getName());
-    }
-
-    public void updateTimeRemaining(){
-        TextView Ntime= findViewById(R.id.NorthMin);
-        TextView Stime= findViewById(R.id.SouthMin);
-
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
-
-        Stop tempObj = stopsObj.ClosestStop(latitude);
-
-        Calendar calendar = Calendar.getInstance();
-        int currentHours = LocalDateTime.now().getHour();
-        int currentMinute = LocalDateTime.now().getMinute();
-        //int seconds = calendar.get(Calendar.SECOND);
-
-        if (tempObj.isExtended() == true){
-            currentMinute = currentMinute % 30;
-        }
-        else{
-            currentMinute = currentMinute % 15;
-        }
-
-        int northFrequencyIndex = tempObj.getNorthFrequency();
-        if(currentMinute > northFrequencyIndex) {
-            if (tempObj.isExtended() == true){
-                northFrequencyIndex += 30;
-            }
-            else{
-                northFrequencyIndex += 15;
-            }
-        }
-        if((currentHours == 0) && ((LocalDateTime.now().getMinute() + 15) > 60) && (currentMinute > tempObj.getNorthFrequency())){
-            Stime.setText(Math.abs(currentMinute - northFrequencyIndex) + " Minutes Last");
-        }
-        else {
-            Ntime.setText(Math.abs(currentMinute - northFrequencyIndex) + " Minutes");
-        }
-
-        int southFrequencyIndex = tempObj.getSouthFrequency();
-        if(currentMinute > southFrequencyIndex) {
-            if (tempObj.isExtended() == true){
-                southFrequencyIndex += 30;
-            }
-            else{
-                southFrequencyIndex += 15;
-            }
-        }
-        if((currentHours == 0) && ((LocalDateTime.now().getMinute() + 15) > 60) && (currentMinute > tempObj.getSouthFrequency())){
-            Stime.setText(Math.abs(currentMinute - southFrequencyIndex) + " Minutes Last");
-        }
-        else {
-            Stime.setText(Math.abs(currentMinute - southFrequencyIndex) + " Minutes");
-        }
-
     }
 }

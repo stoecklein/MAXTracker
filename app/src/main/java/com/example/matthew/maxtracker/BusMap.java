@@ -1,8 +1,12 @@
 package com.example.matthew.maxtracker;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -17,6 +21,12 @@ import java.util.List;
 
 public class BusMap {
 
+    BusMap(Context mContext){
+        this.mContext = mContext;
+    }
+
+    Context mContext;
+
     //Takes in a Google map object
     //Adds stops to map for every stop object in the stop list
     void addMarkers(GoogleMap map, List<Stop> stopList){
@@ -29,7 +39,8 @@ public class BusMap {
             map.addMarker(new MarkerOptions()
                     .position(new LatLng(itrObject.getLat(), itrObject.getLon()))
                     .title(itrObject.getName())
-                    .snippet(itrObject.getSnippet()));
+                    .snippet(itrObject.getSnippet())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
         }
     }
 
@@ -37,7 +48,7 @@ public class BusMap {
 
         PolylineOptions rectOptions = new PolylineOptions()
                 .width(10)  //Set width for line width
-                .color(Color.RED);   //Set color for route line
+                .color(Color.rgb(228, 0, 43));   //Set color for route line
 
         Iterator<Route> itr = routeList.iterator();
         while (itr.hasNext()) {

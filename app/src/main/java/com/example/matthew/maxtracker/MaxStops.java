@@ -12,7 +12,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,13 +24,16 @@ import java.util.List;
  */
 
 public class MaxStops {
-    MaxStops(){
+    MaxStops(Context mContext){
+        this.mContext = mContext;
         fillStopList();
         fillRouteList();
     }
 
-    Time maxTime = new Time(6,1);
-    BusMap maxMap = new BusMap();
+
+    Context mContext;
+    Time maxTime = new Time(6,1, mContext);
+    BusMap maxMap = new BusMap(mContext);
 
     List<Stop> maxStopList = new ArrayList<Stop>();
     List<Route> maxRouteList = new ArrayList<Route>();
@@ -305,6 +310,24 @@ public class MaxStops {
 
     boolean isInOperation(){
         return maxTime.isBusOper();
+    }
+
+    double getLatitude(){
+        LocationManager lm = (LocationManager)mContext.getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        //double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+        return latitude;
+    }
+
+    public void updateTimeRemaining(TextView Ntime, TextView Stime){
+        Stop temp = ClosestStop(getLatitude());
+        maxTime.TimeRemaining(Ntime, Stime, temp);
+    }
+
+    public void updateStopLoc(TextView curLoc){
+        Stop tempObj = ClosestStop(getLatitude());
+        curLoc.setText(tempObj.getName());
     }
 
 }

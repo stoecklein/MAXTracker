@@ -1,5 +1,10 @@
 package com.example.matthew.maxtracker;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
+import android.widget.TextView;
+
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
@@ -9,20 +14,30 @@ import java.util.Calendar;
 
 public class Time {
 
-    Time(int startIn, int endIn){
+    Time(int startIn, int endIn, Context mContext){
+        this.mContext = mContext;
         startTime = startIn;
         endTime = endIn;
     }
 
+    Context mContext;
     int startTime;
     int endTime;
 
-    boolean isBusOper(){
+    int getCurrentHour(){
         Calendar calendar = Calendar.getInstance();
-        int currentHours = LocalDateTime.now().getHour();
+        int currentHour = LocalDateTime.now().getHour();
+        return currentHour;
+    }
+
+    int getCurrentMinunte(){
+        Calendar calendar = Calendar.getInstance();
         int currentMinute = LocalDateTime.now().getMinute();
-        //int seconds = calendar.get(Calendar.SECOND);
-        if( (currentHours < startTime) && (currentHours > endTime )){
+        return currentMinute;
+    }
+
+    boolean isBusOper(){
+        if( (getCurrentHour() < startTime) && (getCurrentHour() > endTime )){
             return false;
         }
         else {
@@ -30,8 +45,43 @@ public class Time {
         }
     }
 
-    void updateTimeRemaining(){
+    void TimeRemaining(TextView Ntime, TextView Stime, Stop ClosestStop){
 
+        int currentMinute;
+        int frequencyIndex;
+        int northFrequency = ClosestStop.getNorthFrequency();
+        int southFrequency = ClosestStop.getSouthFrequency();
+
+        if (ClosestStop.isExtended() == true){
+            frequencyIndex = 30;
+        }
+        else{
+            frequencyIndex =  15;
+        }
+
+        currentMinute = getCurrentMinunte() % frequencyIndex;
+
+        if(currentMinute > northFrequency) {
+                northFrequency += frequencyIndex;
+        }
+
+        if((getCurrentHour() == 0) && ((getCurrentMinunte() + 15) > 60) && (currentMinute > ClosestStop.getNorthFrequency())){
+            Stime.setText(Math.abs(currentMinute - northFrequency) + " Minutes Last");
+        }
+        else {
+            Ntime.setText(Math.abs(currentMinute - northFrequency) + " Minutes");
+        }
+
+        if(currentMinute > southFrequency) {
+                southFrequency += frequencyIndex;
+        }
+
+        if((getCurrentHour() == 0) && ((getCurrentHour() + 15) > 60) && (currentMinute > ClosestStop.getSouthFrequency())){
+            Stime.setText(Math.abs(currentMinute - southFrequency) + " Minutes Last");
+        }
+        else {
+            Stime.setText(Math.abs(currentMinute - southFrequency) + " Minutes");
+        }
     }
 
 }
