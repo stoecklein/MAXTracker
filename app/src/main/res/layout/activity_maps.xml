@@ -29,76 +29,61 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="125dp">
+            android:layout_height="125dp"
+            android:background="@color/colorPrimary">
 
-            <TextView
-                android:id="@+id/StopStatic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Current Stop"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:layout_above="@+id/NorthText"
-                android:layout_alignLeft="@+id/NorthText"
-                android:layout_alignStart="@+id/NorthText"
-                android:layout_marginBottom="11dp" />
-
-            <TextView
-                android:id="@+id/NorthText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/NorthText"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:layout_marginLeft="14dp"
-                android:layout_marginStart="14dp"
-                android:layout_centerVertical="true"
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
+                android:onClick="changeDirection"
+                map:srcCompat="@android:drawable/btn_dialog" />
 
             <TextView
-                android:id="@+id/SouthMin"
+                android:id="@+id/minRemaining"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/SouthText"
-                android:layout_alignBottom="@+id/SouthText"
-                android:layout_alignLeft="@+id/NorthMin"
-                android:layout_alignStart="@+id/NorthMin"
-                android:text="@string/SouthMin"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large" />
-
-            <TextView
-                android:id="@+id/NorthMin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_weight="25"
                 android:text="@string/NorthMin"
                 android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:layout_above="@+id/SouthMin"
-                android:layout_toRightOf="@+id/StopStatic"
-                android:layout_toEndOf="@+id/StopStatic"
-                android:layout_marginLeft="56dp"
-                android:layout_marginStart="56dp" />
-
-            <TextView
-                android:id="@+id/SouthText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/SouthText"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:layout_below="@+id/NorthText"
-                android:layout_alignLeft="@+id/NorthText"
-                android:layout_alignStart="@+id/NorthText" />
+                android:textColor="@color/colorAccent"
+                android:layout_alignTop="@+id/imageButton3"
+                android:layout_toRightOf="@+id/CurrentStop"
+                android:layout_toEndOf="@+id/CurrentStop" />
 
             <TextView
                 android:id="@+id/CurrentStop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_weight="25"
                 android:text="@string/StopText"
                 android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:layout_alignBaseline="@+id/StopStatic"
-                android:layout_alignBottom="@+id/StopStatic"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="20dp"
-                android:layout_marginEnd="20dp" />
+                android:textColor="@color/colorAccent"
+                android:layout_above="@+id/toDirection"
+                android:layout_toRightOf="@+id/imageButton3"
+                android:layout_toEndOf="@+id/imageButton3" />
+
+            <TextView
+                android:id="@+id/toDirection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/CurrentStop"
+                android:layout_alignStart="@+id/CurrentStop"
+                android:layout_centerVertical="true"
+                android:layout_weight="25"
+                android:textColor="@color/colorAccent"
+                android:text="@string/StopText"
+                android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+
         </RelativeLayout>
 
     </LinearLayout>
