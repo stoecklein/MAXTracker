@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.widget.TextView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -12,6 +14,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,6 +40,7 @@ public class MaxStops {
 
     List<Stop> maxStopList = new ArrayList<Stop>();
     List<Route> maxRouteList = new ArrayList<Route>();
+    String[] endStops = {"To River Market", "To Waldo"};
 
 
     void fillRouteList(){
@@ -262,29 +266,29 @@ public class MaxStops {
     }
 
     void fillStopList(){
-        maxStopList.add(new Stop(0, "On Grand at 3rd", "River Market", 39.110462, -94.580374, 7, 13, false));
-        maxStopList.add(new Stop(1, "On Grand at 5th", "City Market", 39.108897, -94.580481, 8, 12, false));
-        maxStopList.add(new Stop(2, "On Grand at 9th", "Courthouse", 39.103494, -94.580707, 9, 11, false));
-        maxStopList.add(new Stop(3, "On Grand at 11th", "Financial District", 39.101119, -94.580826, 10, 10, false));
-        maxStopList.add(new Stop(4, "On Grand at 12th", "Arena", 39.099873, -94.580918, 11, 9, false));
-        maxStopList.add(new Stop(5, "On Grand at 16th", "Crossroads Arts District", 39.094459, -94.581199, 0, 7, false));
-        maxStopList.add(new Stop(6, "On Grand at 19th", "Crossroads Arts District", 39.090433, -94.581396, 4, 3, false));
-        maxStopList.add(new Stop(7, "On Grand at 22nd", "Washington Sq. Park", 39.086061, -94.581599, 4, 2, false));
-        maxStopList.add(new Stop(8, "On Grand at Pershing", "Crown Center", 39.083593, -94.581720, 5, 1, false));
-        maxStopList.add(new Stop(9, "On Main at 29th", "Liberty Memorial", 39.074763, -94.585088, 6, 0, false));
-        maxStopList.add(new Stop(10, "On Main at 31st", "Union Hill", 39.070939, -94.585297, 7, 0, false));
-        maxStopList.add(new Stop(11, "On Main at Linwood", "On Main at Linwood", 39.068265, -94.585429, 8, 15, false));
-        maxStopList.add(new Stop(12, "On Main at Armour", "On Main at Armour", 39.063798, -94.585644, 9, 14, false));
-        maxStopList.add(new Stop(13, "On Main at 39th", "39th", 39.056568, -94.586100, 10, 11, false));
-        maxStopList.add(new Stop(14, "On Main at 43rd", "43rd", 39.049334, -94.586518, 11, 10, false));
-        maxStopList.add(new Stop(15, "On Main at 45th", "Art Museums", 39.046319, -94.586688, 12, 9, false));
-        maxStopList.add(new Stop(16, "On Main at 47th", "Country Club Plaza", 39.041274, -94.588069, 14, 6, false));
-        maxStopList.add(new Stop(17, "On Main at 49th", "Plaza Library", 39.038987, -94.587116, 15, 20, true));
-        maxStopList.add(new Stop(18, "On Brookside at 51st", "UMKC", 39.034369, -94.584249, 16, 19, true));
-        maxStopList.add(new Stop(19, "On Brookside at 55th", "Brookside", 39.027420, -94.584853, 17, 18, true));
-        maxStopList.add(new Stop(20, "On Brookside at 59th", "Brookside", 39.020285, -94.588330, 19, 16, true));
-        maxStopList.add(new Stop(21, "On Brookside at 63rd", "Brookside", 39.013916, -94.591547, 21, 14, true));
-        maxStopList.add(new Stop(22, "On Wornall at Gregory", "Gregory", 38.999689, -94.593838, 23, 11, true));
+        maxStopList.add(new Stop(0, "Grand at 3rd", "River Market", 39.110462, -94.580374, 7, 13, false));
+        maxStopList.add(new Stop(1, "Grand at 5th", "City Market", 39.108897, -94.580481, 8, 12, false));
+        maxStopList.add(new Stop(2, "Grand at 9th", "Courthouse", 39.103494, -94.580707, 9, 11, false));
+        maxStopList.add(new Stop(3, "Grand at 11th", "Financial District", 39.101119, -94.580826, 10, 10, false));
+        maxStopList.add(new Stop(4, "Grand at 12th", "Arena", 39.099873, -94.580918, 11, 9, false));
+        maxStopList.add(new Stop(5, "Grand at 16th", "Crossroads Arts District", 39.094459, -94.581199, 0, 7, false));
+        maxStopList.add(new Stop(6, "Grand at 19th", "Crossroads Arts District", 39.090433, -94.581396, 4, 3, false));
+        maxStopList.add(new Stop(7, "Grand at 22nd", "Washington Sq. Park", 39.086061, -94.581599, 4, 2, false));
+        maxStopList.add(new Stop(8, "Grand at Pershing", "Crown Center", 39.083593, -94.581720, 5, 1, false));
+        maxStopList.add(new Stop(9, "Main at 29th", "Liberty Memorial", 39.074763, -94.585088, 6, 0, false));
+        maxStopList.add(new Stop(10, "Main at 31st", "Union Hill", 39.070939, -94.585297, 7, 0, false));
+        maxStopList.add(new Stop(11, "Main at Linwood", "On Main at Linwood", 39.068265, -94.585429, 8, 15, false));
+        maxStopList.add(new Stop(12, "Main at Armour", "On Main at Armour", 39.063798, -94.585644, 9, 14, false));
+        maxStopList.add(new Stop(13, "Main at 39th", "39th", 39.056568, -94.586100, 10, 11, false));
+        maxStopList.add(new Stop(14, "Main at 43rd", "43rd", 39.049334, -94.586518, 11, 10, false));
+        maxStopList.add(new Stop(15, "Main at 45th", "Art Museums", 39.046319, -94.586688, 12, 9, false));
+        maxStopList.add(new Stop(16, "Main at 47th", "Country Club Plaza", 39.041274, -94.588069, 14, 6, false));
+        maxStopList.add(new Stop(17, "Main at 49th", "Plaza Library", 39.038987, -94.587116, 15, 20, true));
+        maxStopList.add(new Stop(18, "Brookside at 51st", "UMKC", 39.034369, -94.584249, 16, 19, true));
+        maxStopList.add(new Stop(19, "Brookside at 55th", "Brookside", 39.027420, -94.584853, 17, 18, true));
+        maxStopList.add(new Stop(20, "Brookside at 59th", "Brookside", 39.020285, -94.588330, 19, 16, true));
+        maxStopList.add(new Stop(21, "Brookside at 63rd", "Brookside", 39.013916, -94.591547, 21, 14, true));
+        maxStopList.add(new Stop(22, "Wornall at Gregory", "Gregory", 38.999689, -94.593838, 23, 11, true));
         maxStopList.add(new Stop(23, "75th at Wornall", "Waldo", 38.993336, -94.593783, 25, 9, true));
 
     }
@@ -320,9 +324,17 @@ public class MaxStops {
         return latitude;
     }
 
-    public void updateTimeRemaining(TextView Ntime, TextView Stime){
+    double getLongitude(){
+        LocationManager lm = (LocationManager)mContext.getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double longitude = location.getLongitude();
+        //double latitude = location.getLatitude();
+        return longitude;
+    }
+
+    public void updateTimeRemaining(TextView Ntime, TextView directionText, int direction){
         Stop temp = ClosestStop(getLatitude());
-        maxTime.TimeRemaining(Ntime, Stime, temp);
+        maxTime.TimeRemaining(Ntime, directionText, direction, endStops, temp);
     }
 
     public void updateStopLoc(TextView curLoc){

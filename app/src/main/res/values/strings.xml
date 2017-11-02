@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">MAX Tracker</string>
     <string name="title_activity_maps">MAX Tracker</string>
-    <string name="NorthText">Northbound</string>
-    <string name="SouthText">Southbound</string>
-    <string name="NorthMin">15 Mins</string>
-    <string name="SouthMin">15 Mins</string>
+    <string name="NorthText"> </string>
+    <string name="SouthText"> </string>
+    <string name="NorthMin">15</string>
+    <string name="SouthMin">15</string>
     <string name="StopText">Current Stop</string>
+    <string name="LastText">Mins</string>
+    <string name="ButtonDirection">North</string>
+
 </resources>

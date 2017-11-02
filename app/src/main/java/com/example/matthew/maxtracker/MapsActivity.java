@@ -2,14 +2,10 @@ package com.example.matthew.maxtracker;
 
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 
-
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 
@@ -25,12 +21,9 @@ import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.sql.Time;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 
 
 public class MapsActivity extends FragmentActivity
@@ -41,8 +34,11 @@ public class MapsActivity extends FragmentActivity
 
     private static final int PERMISSION_ACCESS_FINE_LOCATION = 1;
     private GoogleApiClient googleApiClient;
+
     private GoogleMap mMap;
-    MaxStops stopsObj = new MaxStops(this); //Object for Max map
+    MaxStops maxRoute = new MaxStops(this); //Object for Max map
+
+    int direction = 0; //0 = North, 1 = South
 
 
     @Override
@@ -59,19 +55,32 @@ public class MapsActivity extends FragmentActivity
                     PERMISSION_ACCESS_FINE_LOCATION);
         }
 
-        TextView Ntime= findViewById(R.id.NorthMin);
-        TextView Stime= findViewById(R.id.SouthMin);
-        TextView curLoc= findViewById(R.id.CurrentStop);
+       // TextView directionText= findViewById(R.id.toDirection);
+       // TextView minRemaining= findViewById(R.id.minRemaining);
+       // TextView curStop= findViewById(R.id.CurrentStop);
 
-        stopsObj.updateStopLoc(curLoc);
-        if(stopsObj.isInOperation() == true){
-            stopsObj.updateTimeRemaining(Ntime, Stime);
+        setup();
+    }
+
+    public void changeDirection(View view) {
+        TextView directionText= findViewById(R.id.toDirection);
+        TextView minRemaining= findViewById(R.id.minRemaining);
+        TextView curStop= findViewById(R.id.CurrentStop);
+
+        if (direction == 0)
+        {direction = 1;}
+
+        else{direction = 0;}
+
+        maxRoute.updateStopLoc(curStop);
+        if(maxRoute.isInOperation() == true){
+            maxRoute.updateTimeRemaining(minRemaining, directionText, direction);
         }
         else{
-            Ntime= findViewById(R.id.NorthMin);
-            Stime= findViewById(R.id.SouthMin);
-            Ntime.setText("No Bus On Route");
-            Stime.setText("No Bus On Route");
+            //Ntime = findViewById(R.id.NorthMin);
+            //Stime = findViewById(R.id.SouthMin);
+            //Ntime.setText("No Bus On Route");
+            //Stime.setText("No Bus On Route");
         }
     }
 
@@ -79,15 +88,13 @@ public class MapsActivity extends FragmentActivity
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setOnMyLocationButtonClickListener(this);
-        //mMap.setOnMyLocationClickListener(this);
         enableMyLocation();
 
-        stopsObj.addMapMarkers(mMap);   //Places markers for stops
-        stopsObj.addRouteLine(mMap);    //Draw route line
+        maxRoute.addMapMarkers(mMap);   //Places markers for stops
+        maxRoute.addRouteLine(mMap);    //Draw route linea
 
-
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(39.052397, -94.586374) , 12.25f) );
-
+        //(39.052397, -94.586374) ,12.25f) for full view
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(maxRoute.getLatitude(), maxRoute.getLongitude()), 14.25f));
     }
   
     @Override
@@ -124,9 +131,27 @@ public class MapsActivity extends FragmentActivity
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
+
+        setup();
         return false;
+    }
+
+    public void setup(){
+        TextView directionText= findViewById(R.id.toDirection);
+        TextView minRemaining= findViewById(R.id.minRemaining);
+        TextView curStop= findViewById(R.id.CurrentStop);
+
+        maxRoute.updateStopLoc(curStop);
+        if(maxRoute.isInOperation() == true){
+            maxRoute.updateTimeRemaining(minRemaining, directionText, direction);
+        }
+        else{
+            curStop.setText("No Busses Running");
+            minRemaining.setText(" ");
+            directionText.setText(" ");
+        }
     }
 }

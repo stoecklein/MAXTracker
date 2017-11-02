@@ -10,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -23,6 +23,9 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_above="@+id/imageButton3"
+                android:layout_alignEnd="@+id/last"
+                android:layout_alignRight="@+id/last"
                 tools:context=".MapsActivity" />
 
         </RelativeLayout>
@@ -34,55 +37,73 @@
 
             <ImageButton
                 android:id="@+id/imageButton3"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="23dp"
-                android:layout_marginStart="23dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/swap_direction"
                 android:onClick="changeDirection"
-                map:srcCompat="@android:drawable/btn_dialog" />
+                map:srcCompat="@drawable/swap_direction" />
 
             <TextView
                 android:id="@+id/minRemaining"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginStart="40dp"
+                android:layout_alignBaseline="@+id/toDirection"
+                android:layout_alignBottom="@+id/toDirection"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="25"
                 android:text="@string/NorthMin"
+                android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Holo.Large"
                 android:textColor="@color/colorAccent"
-                android:layout_alignTop="@+id/imageButton3"
-                android:layout_toRightOf="@+id/CurrentStop"
-                android:layout_toEndOf="@+id/CurrentStop" />
+                android:textSize="56dp" />
 
             <TextView
                 android:id="@+id/CurrentStop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginStart="25dp"
+                android:layout_alignLeft="@+id/toDirection"
+                android:layout_alignStart="@+id/toDirection"
+                android:layout_alignTop="@+id/imageButton3"
                 android:layout_weight="25"
                 android:text="@string/StopText"
                 android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:textColor="@color/colorAccent"
-                android:layout_above="@+id/toDirection"
-                android:layout_toRightOf="@+id/imageButton3"
-                android:layout_toEndOf="@+id/imageButton3" />
+                android:textColor="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/toDirection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/CurrentStop"
-                android:layout_alignStart="@+id/CurrentStop"
-                android:layout_centerVertical="true"
+                android:layout_below="@+id/CurrentStop"
+                android:layout_marginLeft="21dp"
+                android:layout_marginStart="21dp"
+                android:layout_toEndOf="@+id/imageButton3"
+                android:layout_toRightOf="@+id/imageButton3"
                 android:layout_weight="25"
-                android:textColor="@color/colorAccent"
                 android:text="@string/StopText"
-                android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+                android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/last"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/minRemaining"
+                android:layout_alignLeft="@+id/minRemaining"
+                android:layout_alignRight="@+id/minRemaining"
+                android:layout_alignStart="@+id/minRemaining"
+                android:layout_below="@+id/toDirection"
+                android:text="@string/LastText"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.Holo.Small"
+                android:textColor="@color/colorAccent" />
 
         </RelativeLayout>
 
