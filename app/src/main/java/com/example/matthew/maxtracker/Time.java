@@ -1,11 +1,8 @@
 package com.example.matthew.maxtracker;
 
 import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
@@ -16,7 +13,14 @@ import java.util.Calendar;
 public class Time {
 
     Time(int startIn, int endIn, Context mContext){
-        this.mContext = mContext;
+        try {
+            this.mContext = mContext;
+            assert mContext != null;
+        }
+        catch (AssertionError e) {
+            System.exit(0);
+        }
+
         startTime = startIn;
         endTime = endIn;
     }
@@ -25,17 +29,21 @@ public class Time {
     int startTime;
     int endTime;
 
+
+    // Returns current hour
     int getCurrentHour(){
         Calendar calendar = Calendar.getInstance();
         int currentHour = LocalDateTime.now().getHour();
         return currentHour;
     }
 
+    // Returns current Minute
     int getCurrentMinunte(){
         Calendar calendar = Calendar.getInstance();
         int currentMinute = LocalDateTime.now().getMinute();
         return currentMinute;
     }
+
 
     boolean isBusOper(){
         if( (getCurrentHour() < startTime) && (getCurrentHour() > endTime )){

@@ -50,14 +50,14 @@
 
             <TextView
                 android:id="@+id/minRemaining"
-                android:layout_width="wrap_content"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/toDirection"
                 android:layout_alignBottom="@+id/toDirection"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
                 android:layout_weight="25"
                 android:text="@string/NorthMin"
                 android:textAlignment="center"
@@ -75,13 +75,14 @@
                 android:layout_weight="25"
                 android:text="@string/StopText"
                 android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:textColor="@color/colorAccent" />
+                android:textColor="@color/colorAccent"
+                android:textSize="28dp" />
 
             <TextView
                 android:id="@+id/toDirection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/CurrentStop"
+                android:layout_above="@+id/last"
                 android:layout_marginLeft="21dp"
                 android:layout_marginStart="21dp"
                 android:layout_toEndOf="@+id/imageButton3"
@@ -93,13 +94,11 @@
 
             <TextView
                 android:id="@+id/last"
-                android:layout_width="wrap_content"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/minRemaining"
+                android:layout_alignBottom="@+id/imageButton3"
                 android:layout_alignLeft="@+id/minRemaining"
-                android:layout_alignRight="@+id/minRemaining"
                 android:layout_alignStart="@+id/minRemaining"
-                android:layout_below="@+id/toDirection"
                 android:text="@string/LastText"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Holo.Small"

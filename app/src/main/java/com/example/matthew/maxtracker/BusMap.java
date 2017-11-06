@@ -1,9 +1,7 @@
 package com.example.matthew.maxtracker;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -22,13 +20,19 @@ import java.util.List;
 public class BusMap {
 
     BusMap(Context mContext){
-        this.mContext = mContext;
+        try {
+            this.mContext = mContext;
+            assert mContext != null;
+        }
+        catch (AssertionError e) {
+            System.exit(0);
+        }
     }
 
     Context mContext;
 
-    //Takes in a Google map object
-    //Adds stops to map for every stop object in the stop list
+    // Pre-condition: The Google map has been initialized
+    // Post-condition: The Google map contains a marker for every element in maxStopList
     void addMarkers(GoogleMap map, List<Stop> stopList){
 
         Iterator<Stop> itr = stopList.iterator();
@@ -44,6 +48,8 @@ public class BusMap {
         }
     }
 
+    // Pre-condition: The Google map has been initialized
+    // Post-condition: The Google map contains a line to every object in maxRouteList
     void addRoute(GoogleMap map, List<Route> routeList) {
 
         PolylineOptions rectOptions = new PolylineOptions()
@@ -60,8 +66,8 @@ public class BusMap {
         Polyline polyline = map.addPolyline(rectOptions);// Get back the mutable Polyline
     }
 
-    //Take in users current lat
-    //Return stop object as the closest stop
+    // Pre-condition: stopList is not empty
+    // Post-condition:
     Stop closestStop (List<Stop> stopList, double latIn){
 
         Iterator<Stop> itr = stopList.iterator();

@@ -1,48 +1,44 @@
 package com.example.matthew.maxtracker;
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.widget.TextView;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.lang.reflect.Array;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 
-
 /**
- * Created by matthew on 10/16/17.
+ * Data for each stop on the Max line
  */
 
 public class MaxStops {
     MaxStops(Context mContext){
+        //For getting location
         this.mContext = mContext;
+
         fillStopList();
         fillRouteList();
     }
 
-
     Context mContext;
-    Time maxTime = new Time(6,1, mContext);
-    BusMap maxMap = new BusMap(mContext);
+    Time maxTime = new Time(6,1, mContext); //Creating a Time object with Max Times
+    BusMap maxMap = new BusMap(mContext);   //BusMap object for handing map logic
 
-    List<Stop> maxStopList = new ArrayList<Stop>();
-    List<Route> maxRouteList = new ArrayList<Route>();
-    String[] endStops = {"To River Market", "To Waldo"};
+    // List of stop objects for each max stop
+    final private List<Stop> maxStopList = new ArrayList<Stop>();
+
+    //List of route objects for the Max route
+    final private List<Route> maxRouteList = new ArrayList<Route>();
+
+    // Start and end points for show direction on the UI
+    final private String[] endStops = {"To River Market", "To Waldo"};
 
 
+
+    // Pre-condition: A list of Route objects has been initialized
+    // Post-condition: maxRouteList contains every stop added
     void fillRouteList(){
         maxRouteList.add(new Route(39.110462, -94.580374));
         maxRouteList.add(new Route(39.110344, -94.580961));
@@ -265,57 +261,62 @@ public class MaxStops {
         maxRouteList.add(new Route(38.993336, -94.593783));//loop back to 74 & Wornall
     }
 
+    // Pre-condition: A list of Stop objects has been initialized
+    // Post-condition: maxStopList contains every stop added
     void fillStopList(){
-        maxStopList.add(new Stop(0, "Grand at 3rd", "River Market", 39.110462, -94.580374, 7, 13, false));
-        maxStopList.add(new Stop(1, "Grand at 5th", "City Market", 39.108897, -94.580481, 8, 12, false));
-        maxStopList.add(new Stop(2, "Grand at 9th", "Courthouse", 39.103494, -94.580707, 9, 11, false));
-        maxStopList.add(new Stop(3, "Grand at 11th", "Financial District", 39.101119, -94.580826, 10, 10, false));
-        maxStopList.add(new Stop(4, "Grand at 12th", "Arena", 39.099873, -94.580918, 11, 9, false));
-        maxStopList.add(new Stop(5, "Grand at 16th", "Crossroads Arts District", 39.094459, -94.581199, 0, 7, false));
-        maxStopList.add(new Stop(6, "Grand at 19th", "Crossroads Arts District", 39.090433, -94.581396, 4, 3, false));
-        maxStopList.add(new Stop(7, "Grand at 22nd", "Washington Sq. Park", 39.086061, -94.581599, 4, 2, false));
-        maxStopList.add(new Stop(8, "Grand at Pershing", "Crown Center", 39.083593, -94.581720, 5, 1, false));
-        maxStopList.add(new Stop(9, "Main at 29th", "Liberty Memorial", 39.074763, -94.585088, 6, 0, false));
-        maxStopList.add(new Stop(10, "Main at 31st", "Union Hill", 39.070939, -94.585297, 7, 0, false));
-        maxStopList.add(new Stop(11, "Main at Linwood", "On Main at Linwood", 39.068265, -94.585429, 8, 15, false));
-        maxStopList.add(new Stop(12, "Main at Armour", "On Main at Armour", 39.063798, -94.585644, 9, 14, false));
-        maxStopList.add(new Stop(13, "Main at 39th", "39th", 39.056568, -94.586100, 10, 11, false));
-        maxStopList.add(new Stop(14, "Main at 43rd", "43rd", 39.049334, -94.586518, 11, 10, false));
-        maxStopList.add(new Stop(15, "Main at 45th", "Art Museums", 39.046319, -94.586688, 12, 9, false));
-        maxStopList.add(new Stop(16, "Main at 47th", "Country Club Plaza", 39.041274, -94.588069, 14, 6, false));
-        maxStopList.add(new Stop(17, "Main at 49th", "Plaza Library", 39.038987, -94.587116, 15, 20, true));
-        maxStopList.add(new Stop(18, "Brookside at 51st", "UMKC", 39.034369, -94.584249, 16, 19, true));
-        maxStopList.add(new Stop(19, "Brookside at 55th", "Brookside", 39.027420, -94.584853, 17, 18, true));
-        maxStopList.add(new Stop(20, "Brookside at 59th", "Brookside", 39.020285, -94.588330, 19, 16, true));
-        maxStopList.add(new Stop(21, "Brookside at 63rd", "Brookside", 39.013916, -94.591547, 21, 14, true));
-        maxStopList.add(new Stop(22, "Wornall at Gregory", "Gregory", 38.999689, -94.593838, 23, 11, true));
-        maxStopList.add(new Stop(23, "75th at Wornall", "Waldo", 38.993336, -94.593783, 25, 9, true));
+        maxStopList.add(new Stop(0, "3rd & Grand", "River Market", 39.110462, -94.580374, 7, 13, false));
+        maxStopList.add(new Stop(1, "5th & Grand", "City Market", 39.108897, -94.580481, 8, 12, false));
+        maxStopList.add(new Stop(2, "9th & Grand", "Courthouse", 39.103494, -94.580707, 9, 11, false));
+        maxStopList.add(new Stop(3, "10 & Grand", "Financial District", 39.101119, -94.580826, 10, 10, false));
+        maxStopList.add(new Stop(4, "12th & Grand", "Arena", 39.099873, -94.580918, 11, 9, false));
+        maxStopList.add(new Stop(5, "16th & Grand", "Crossroads Arts District", 39.094459, -94.581199, 0, 7, false));
+        maxStopList.add(new Stop(6, "19th & Grand", "Crossroads Arts District", 39.090433, -94.581396, 4, 3, false));
+        maxStopList.add(new Stop(7, "22nd & Grand", "Washington Sq. Park", 39.086061, -94.581599, 4, 2, false));
+        maxStopList.add(new Stop(8, "Pershing & Grand", "Crown Center", 39.083593, -94.581720, 5, 1, false));
+        maxStopList.add(new Stop(9, "29th & Main", "Liberty Memorial", 39.074763, -94.585088, 6, 0, false));
+        maxStopList.add(new Stop(10, "31st & Main", "Union Hill", 39.070939, -94.585297, 7, 0, false));
+        maxStopList.add(new Stop(11, "Linwood & Main", "On Main at Linwood", 39.068265, -94.585429, 8, 15, false));
+        maxStopList.add(new Stop(12, "Armour & Main", "On Main at Armour", 39.063798, -94.585644, 9, 14, false));
+        maxStopList.add(new Stop(13, "39th & Main", "39th", 39.056568, -94.586100, 10, 11, false));
+        maxStopList.add(new Stop(14, "43rd & Main", "43rd", 39.049334, -94.586518, 11, 10, false));
+        maxStopList.add(new Stop(15, "45th & Main", "Art Museums", 39.046319, -94.586688, 12, 9, false));
+        maxStopList.add(new Stop(16, "47th & Main", "Country Club Plaza", 39.041274, -94.588069, 14, 6, false));
+        maxStopList.add(new Stop(17, "49th & Main", "Plaza Library", 39.038987, -94.587116, 15, 20, true));
+        maxStopList.add(new Stop(18, "52st & Brookside", "UMKC", 39.034369, -94.584249, 16, 19, true));
+        maxStopList.add(new Stop(19, "55th & Brookside", "Brookside", 39.027420, -94.584853, 17, 18, true));
+        maxStopList.add(new Stop(20, "59th & Brookside", "Brookside", 39.020285, -94.588330, 19, 16, true));
+        maxStopList.add(new Stop(21, "63rd & Brookside", "Brookside", 39.013916, -94.591547, 21, 14, true));
+        maxStopList.add(new Stop(22, "Gregory & Wornall", "Gregory", 38.999689, -94.593838, 23, 11, true));
+        maxStopList.add(new Stop(23, "75th & Wornall", "Waldo", 38.993336, -94.593783, 25, 9, true));
 
     }
 
-    //Take in users current lat
-    //Return stop object as the closest stop
-    Stop ClosestStop (double latIn){
-
-        return maxMap.closestStop(maxStopList, latIn);
-    }
-
-    //Takes in a Google map object
-    //Adds stops to map for every stop object in the stop list
+    // Passes map and maxStopList to BusMap class to handle logic
     void addMapMarkers(GoogleMap map){
+        try {
+            assert map != null;
+        }
+        catch (AssertionError e) {
+            System.exit(0);
+        }
+
         maxMap.addMarkers(map, maxStopList);
     }
 
-    //Takes in a Google map object
-    //Adds route line for Max route
+    // Passes map and maxRouteList to BusMap class to handle logic
     void addRouteLine(GoogleMap map){
+        try {
+            assert map != null;
+        }
+        catch (AssertionError e) {
+            System.exit(0);
+        }
+
         maxMap.addRoute(map, maxRouteList);
     }
 
-    boolean isInOperation(){
-        return maxTime.isBusOper();
-    }
-
+    // Returns a users current latitude via API
+    // For being able to update location as needed
     double getLatitude(){
         LocationManager lm = (LocationManager)mContext.getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -324,6 +325,8 @@ public class MaxStops {
         return latitude;
     }
 
+    // Returns a users current latitude via API
+    // For being able to update location as needed
     double getLongitude(){
         LocationManager lm = (LocationManager)mContext.getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -332,11 +335,24 @@ public class MaxStops {
         return longitude;
     }
 
+    // Calls Time class to handle logic
+    boolean isInOperation(){
+        return maxTime.isBusOper();
+    }
+
+    // Pre-condition: maxStopList isn't empty
+    // Post-condition: Returns the stop object closest in latitude to the user
+    Stop ClosestStop (double latIn){
+        return maxMap.closestStop(maxStopList, latIn);
+    }
+
+    // Gets closest stop at the moment and passes logic to Time class
     public void updateTimeRemaining(TextView Ntime, TextView directionText, int direction){
         Stop temp = ClosestStop(getLatitude());
         maxTime.TimeRemaining(Ntime, directionText, direction, endStops, temp);
     }
 
+    // Gets closest stop at the moment and updates text on UI
     public void updateStopLoc(TextView curLoc){
         Stop tempObj = ClosestStop(getLatitude());
         curLoc.setText(tempObj.getName());

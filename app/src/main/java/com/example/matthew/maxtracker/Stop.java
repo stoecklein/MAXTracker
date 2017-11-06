@@ -1,9 +1,5 @@
 package com.example.matthew.maxtracker;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Stop {
     Stop(int idIn, String nameIn, String snippetIn, double latIn, double lonIn, int southFreqIn, int northFreqIn, boolean extendedIn){
         id = idIn;

@@ -6,7 +6,7 @@
     <string name="NorthMin">15</string>
     <string name="SouthMin">15</string>
     <string name="StopText">Current Stop</string>
-    <string name="LastText">Mins</string>
+    <string name="LastText">Minutes</string>
     <string name="ButtonDirection">North</string>
 
 </resources>
