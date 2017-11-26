@@ -5,6 +5,9 @@ import android.location.LocationManager;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -356,6 +359,19 @@ public class MaxStops {
     public void updateStopLoc(TextView curLoc){
         Stop tempObj = ClosestStop(getLatitude());
         curLoc.setText(tempObj.getName());
+    }
+
+    public void showRealTime(GoogleMap map){
+        //Get real time location
+        double lat = 39.089538;
+        double lon = -94.581437;
+
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(lat, lon))
+                //.title(itrObject.getName())
+                //.snippet(itrObject.getSnippet())
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_live_blue)));
+
     }
 
 }

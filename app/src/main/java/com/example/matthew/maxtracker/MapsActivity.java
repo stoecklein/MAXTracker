@@ -2,6 +2,7 @@ package com.example.matthew.maxtracker;
 
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.location.Location;
@@ -21,6 +22,8 @@ import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,10 +58,6 @@ public class MapsActivity extends FragmentActivity
                     PERMISSION_ACCESS_FINE_LOCATION);
         }
 
-       // TextView directionText= findViewById(R.id.toDirection);
-       // TextView minRemaining= findViewById(R.id.minRemaining);
-       // TextView curStop= findViewById(R.id.CurrentStop);
-
         setup();
     }
 
@@ -92,6 +91,7 @@ public class MapsActivity extends FragmentActivity
 
         maxRoute.addMapMarkers(mMap);   //Places markers for stops
         maxRoute.addRouteLine(mMap);    //Draw route linea
+        maxRoute.showRealTime(mMap);
 
         //(39.052397, -94.586374) ,12.25f) for full view
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(maxRoute.getLatitude(), maxRoute.getLongitude()), 14.25f));
@@ -137,6 +137,11 @@ public class MapsActivity extends FragmentActivity
 
         setup();
         return false;
+    }
+
+    public void onClickAbout(View view) {
+        Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+        startActivity(intent);  //Shows about activity
     }
 
     public void setup(){

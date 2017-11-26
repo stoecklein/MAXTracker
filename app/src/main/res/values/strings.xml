@@ -8,5 +8,10 @@
     <string name="StopText">Current Stop</string>
     <string name="LastText">Minutes</string>
     <string name="ButtonDirection">North</string>
+    <string name="aboutText">
+        MAX Tracker
+        Matthew Stoecklein
+        mjs974@mail.umkc.edu
+    </string>
 
 </resources>

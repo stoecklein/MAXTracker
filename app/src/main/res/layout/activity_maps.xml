@@ -28,6 +28,19 @@
                 android:layout_alignRight="@+id/last"
                 tools:context=".MapsActivity" />
 
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="21dp"
+                android:onClick="onClickAbout"
+                android:src="@drawable/menu_map" />/>
+
         </RelativeLayout>
 
         <RelativeLayout
