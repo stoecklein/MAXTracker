@@ -350,9 +350,9 @@ public class MaxStops {
     }
 
     // Gets closest stop at the moment and passes logic to Time class
-    public void updateTimeRemaining(TextView Ntime, TextView directionText, int direction){
+    public void updateTimeRemaining(TextView Ntime, TextView directionText, TextView lastText, int direction){
         Stop temp = ClosestStop(getLatitude());
-        maxTime.TimeRemaining(Ntime, directionText, direction, endStops, temp);
+        maxTime.TimeRemaining(Ntime, directionText, lastText, direction, endStops, temp);
     }
 
     // Gets closest stop at the moment and updates text on UI

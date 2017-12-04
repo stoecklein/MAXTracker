@@ -63,6 +63,7 @@ public class MapsActivity extends FragmentActivity
 
     public void changeDirection(View view) {
         TextView directionText= findViewById(R.id.toDirection);
+        TextView lastText= findViewById(R.id.last);
         TextView minRemaining= findViewById(R.id.minRemaining);
         TextView curStop= findViewById(R.id.CurrentStop);
 
@@ -73,7 +74,7 @@ public class MapsActivity extends FragmentActivity
 
         maxRoute.updateStopLoc(curStop);
         if(maxRoute.isInOperation() == true){
-            maxRoute.updateTimeRemaining(minRemaining, directionText, direction);
+            maxRoute.updateTimeRemaining(minRemaining,directionText, lastText, direction);
         }
         else{
             //Ntime = findViewById(R.id.NorthMin);
@@ -146,12 +147,13 @@ public class MapsActivity extends FragmentActivity
 
     public void setup(){
         TextView directionText= findViewById(R.id.toDirection);
+        TextView lastText= findViewById(R.id.last);
         TextView minRemaining= findViewById(R.id.minRemaining);
         TextView curStop= findViewById(R.id.CurrentStop);
 
         maxRoute.updateStopLoc(curStop);
         if(maxRoute.isInOperation() == true){
-            maxRoute.updateTimeRemaining(minRemaining, directionText, direction);
+            maxRoute.updateTimeRemaining(minRemaining, directionText, lastText, direction);
         }
         else{
             curStop.setText("No Busses Running");

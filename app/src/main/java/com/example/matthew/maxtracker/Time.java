@@ -54,7 +54,7 @@ public class Time {
         }
     }
 
-    void TimeRemaining(TextView timeRemaining, TextView directionText, int direction, String[] endStops, Stop ClosestStop){
+    void TimeRemaining(TextView timeRemaining, TextView directionText, TextView lastText, int direction, String[] endStops, Stop ClosestStop){
 
         int currentMinute;
         int frequencyIndex;
@@ -80,9 +80,10 @@ public class Time {
             }
 
             if ((getCurrentHour() == 0) && ((getCurrentMinunte() + 15) > 60) && (currentMinute > ClosestStop.getNorthFrequency())) {
-                timeRemaining.setText(Math.abs(currentMinute - northFrequency) + " ");//LAST
+                timeRemaining.setText(Math.abs(currentMinute - northFrequency) + "");
+                lastText.setText("Last");//LAST
             } else {
-                timeRemaining.setText(Math.abs(currentMinute - northFrequency) + " ");
+                timeRemaining.setText(Math.abs(currentMinute - northFrequency) + "");
             }
         }
 
@@ -92,9 +93,10 @@ public class Time {
             }
 
             if ((getCurrentHour() == 0) && ((getCurrentHour() + 15) > 60) && (currentMinute > ClosestStop.getSouthFrequency())) {
-                timeRemaining.setText(Math.abs(currentMinute - southFrequency) + " ");//LAST
+                timeRemaining.setText(Math.abs(currentMinute - southFrequency) + "");
+                lastText.setText("Last");//LAST
             } else {
-                timeRemaining.setText(Math.abs(currentMinute - southFrequency) + " ");
+                timeRemaining.setText(Math.abs(currentMinute - southFrequency) + "");
             }
         }
     }
