@@ -3,8 +3,8 @@
     <string name="title_activity_maps">MAX Tracker</string>
     <string name="NorthText"> </string>
     <string name="SouthText"> </string>
-    <string name="NorthMin">15</string>
-    <string name="SouthMin">15</string>
+    <string name="NorthMin">15</string> // 15 default
+    <string name="SouthMin">15</string> // 15 default
     <string name="StopText">Current Stop</string>
     <string name="LastText">Minutes</string>
     <string name="ButtonDirection">North</string>

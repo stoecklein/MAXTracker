@@ -44,7 +44,7 @@ public class Time {
         return currentMinute;
     }
 
-
+    //  Returns true if bus is running
     boolean isBusOper(){
         if( (getCurrentHour() < startTime) && (getCurrentHour() > endTime )){
             return false;
@@ -54,6 +54,8 @@ public class Time {
         }
     }
 
+    // Pre-condition: A list of Stop objects has been initialized
+    // Post-condition: Textview display
     void TimeRemaining(TextView timeRemaining, TextView directionText, TextView lastText, int direction, String[] endStops, Stop ClosestStop){
 
         int currentMinute;
@@ -72,32 +74,24 @@ public class Time {
 
         currentMinute = getCurrentMinunte() % frequencyIndex;
 
-        if (direction == 0) {
+        if (direction == 0)
+            timeDirection(timeRemaining, lastText, ClosestStop, currentMinute, frequencyIndex, northFrequency);
 
+        else
+            timeDirection(timeRemaining, lastText, ClosestStop, currentMinute, frequencyIndex, southFrequency);
+    }
 
-            if (currentMinute > northFrequency) {
-                northFrequency += frequencyIndex;
-            }
+    void timeDirection(TextView timeRemaining, TextView lastText, Stop ClosestStop, int currentMinute, int frequencyIndex, int directionFrequency){
 
-            if ((getCurrentHour() == 0) && ((getCurrentMinunte() + 15) > 60) && (currentMinute > ClosestStop.getNorthFrequency())) {
-                timeRemaining.setText(Math.abs(currentMinute - northFrequency) + "");
-                lastText.setText("Last");//LAST
-            } else {
-                timeRemaining.setText(Math.abs(currentMinute - northFrequency) + "");
-            }
+        if (currentMinute > directionFrequency) {
+            directionFrequency += frequencyIndex;
         }
 
-        else {
-            if (currentMinute > southFrequency) {
-                southFrequency += frequencyIndex;
-            }
-
-            if ((getCurrentHour() == 0) && ((getCurrentHour() + 15) > 60) && (currentMinute > ClosestStop.getSouthFrequency())) {
-                timeRemaining.setText(Math.abs(currentMinute - southFrequency) + "");
-                lastText.setText("Last");//LAST
-            } else {
-                timeRemaining.setText(Math.abs(currentMinute - southFrequency) + "");
-            }
+        if ((getCurrentHour() == 0) && ((getCurrentMinunte() + 15) > 60) && (currentMinute > ClosestStop.getNorthFrequency())) {
+            timeRemaining.setText(Math.abs(currentMinute - directionFrequency) + "");
+            lastText.setText("Last");//LAST
+        } else {
+            timeRemaining.setText(Math.abs(currentMinute - directionFrequency) + "");
         }
     }
 

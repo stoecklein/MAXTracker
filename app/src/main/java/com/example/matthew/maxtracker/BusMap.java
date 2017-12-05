@@ -53,7 +53,7 @@ public class BusMap {
     void addRoute(GoogleMap map, List<Route> routeList) {
 
         PolylineOptions rectOptions = new PolylineOptions()
-                .width(10)  //Set width for line width
+                .width(10)  //Set width for line width (10)
                 .color(Color.rgb(228, 0, 43));   //Set color for route line
 
         Iterator<Route> itr = routeList.iterator();
@@ -63,7 +63,7 @@ public class BusMap {
 
             rectOptions.add(new LatLng(itrObject.lat, itrObject.lon));
         }
-        Polyline polyline = map.addPolyline(rectOptions);// Get back the mutable Polyline
+        Polyline polyline = map.addPolyline(rectOptions);   // Get back the mutable Polyline
     }
 
     // Pre-condition: stopList is not empty

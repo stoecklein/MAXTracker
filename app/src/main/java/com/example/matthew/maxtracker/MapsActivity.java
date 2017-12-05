@@ -1,6 +1,5 @@
 package com.example.matthew.maxtracker;
 
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,11 +21,8 @@ import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MapsActivity extends FragmentActivity
@@ -38,10 +34,10 @@ public class MapsActivity extends FragmentActivity
     private static final int PERMISSION_ACCESS_FINE_LOCATION = 1;
     private GoogleApiClient googleApiClient;
 
-    private GoogleMap mMap;
-    MaxStops maxRoute = new MaxStops(this); //Object for Max map
+    private GoogleMap mMap; //Creates a map object to display
+    private MaxStops maxRoute = new MaxStops(this); //Creates a object for MAX data
 
-    int direction = 0; //0 = North, 1 = South
+    private int direction = 0; //0 = North, 1 = South
 
 
     @Override
@@ -77,10 +73,7 @@ public class MapsActivity extends FragmentActivity
             maxRoute.updateTimeRemaining(minRemaining,directionText, lastText, direction);
         }
         else{
-            //Ntime = findViewById(R.id.NorthMin);
-            //Stime = findViewById(R.id.SouthMin);
-            //Ntime.setText("No Bus On Route");
-            //Stime.setText("No Bus On Route");
+            curStop.setText("No Bus On Route");
         }
     }
 
@@ -132,10 +125,6 @@ public class MapsActivity extends FragmentActivity
 
     @Override
     public boolean onMyLocationButtonClick() {
-        //Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
-
         setup();
         return false;
     }
@@ -156,7 +145,7 @@ public class MapsActivity extends FragmentActivity
             maxRoute.updateTimeRemaining(minRemaining, directionText, lastText, direction);
         }
         else{
-            curStop.setText("No Busses Running");
+            curStop.setText("No Bus On Route");
             minRemaining.setText(" ");
             directionText.setText(" ");
         }
